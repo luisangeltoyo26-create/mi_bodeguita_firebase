@@ -1,0 +1,30 @@
+{
+  "name": "Mi Bodeguita",
+  "short_name": "Bodeguita",
+  "description": "Ventas e inventario para minimarket",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f3f6f4",
+  "theme_color": "#0a3d2e",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "./index.html",
+  "scope": "./",
+  "lang": "es"
+}

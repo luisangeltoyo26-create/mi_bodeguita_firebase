@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a3d2e">
+<title>Mi Bodeguita</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg:#f3f6f4;--surface:#fff;--ink:#13201b;--muted:#5b6a63;--line:#dce4df;--brand:#0e6b4e;--brand-ink:#fff;--deep:#0a3d2e;--soft:#e2f1e9;--warn:#9a5b00;--warn-bg:#fff0d2;--danger:#b3261e;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1411;--surface:#151f1a;--ink:#e8efeb;--muted:#9aaba3;--line:#25322c;--brand:#3ec28f;--brand-ink:#05261b;--deep:#0b3a2b;--soft:#173628;--warn:#f0b24a;--warn-bg:#3a2c10;--danger:#f2766e}}
+:root[data-theme="dark"]{--bg:#0d1411;--surface:#151f1a;--ink:#e8efeb;--muted:#9aaba3;--line:#25322c;--brand:#3ec28f;--brand-ink:#05261b;--deep:#0b3a2b;--soft:#173628;--warn:#f0b24a;--warn-bg:#3a2c10;--danger:#f2766e}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;font-variant-numeric:tabular-nums}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;max-width:980px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--deep);color:#fff;display:grid;place-items:center;font-weight:800;font-size:18px}
+h1{font-size:17px;line-height:1.2;margin:0;font-weight:700}
+.brand small{color:var(--muted);font-size:12.5px}
+.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);border:1px solid var(--line);background:var(--surface);padding:5px 11px;border-radius:99px}
+#netDot{width:8px;height:8px;border-radius:50%;background:#25805d}
+main{max-width:980px;margin:0 auto;padding:0 16px 104px}
+.page{display:none}.page.active{display:block}
+h2{font-size:24px;letter-spacing:-.02em;margin:14px 0 16px;font-weight:800}
+h3{font-size:15px;margin:0 0 12px;font-weight:700}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.panel-head h3{margin:0}
+.hero{background:var(--deep);color:#fff;border-radius:20px;padding:24px 22px;margin:2px 0 14px;display:grid;gap:2px}
+.hero span{font-size:13.5px;color:rgba(255,255,255,.75)}
+.hero strong{font-size:clamp(42px,13vw,64px);line-height:1.05;letter-spacing:-.035em;font-weight:800}
+.hero .primary{background:#fff;color:var(--deep);margin-top:16px;justify-self:start}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-bottom:16px}
+.stats article{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:2px;align-content:start}
+.stats span{font-size:12.5px;color:var(--muted)}.stats strong{font-size:20px;font-weight:700;letter-spacing:-.01em}.stats small{font-size:12px;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;align-items:end}
+label{display:grid;gap:6px;font-size:13px;font-weight:600}
+input,select,textarea{width:100%;min-height:44px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;font-size:16px;font-weight:500}
+textarea{font:12px/1.4 ui-monospace,Menlo,monospace;min-height:160px}
+:is(input,select,textarea,button):focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+button{font:inherit;font-weight:600;cursor:pointer}
+.primary,.secondary,.danger{min-height:44px;padding:0 18px;border-radius:10px;border:1px solid transparent}
+.primary{background:var(--brand);color:var(--brand-ink)}
+.secondary{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.danger{background:var(--surface);color:var(--danger);border-color:var(--line)}
+.full{width:100%}
+.link{background:none;border:0;color:var(--brand);padding:6px 4px;font-size:14px}
+.two-col{display:grid;gap:16px}
+@media(min-width:800px){.two-col{grid-template-columns:1.3fr 1fr;align-items:start}}
+.inline{display:flex;gap:12px;align-items:end;margin:12px 0}.inline label{flex:1}
+.big-total{font-size:42px;font-weight:800;letter-spacing:-.035em;line-height:1.1;margin:2px 0 14px}
+.list-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.list-row:last-child{border-bottom:0}
+.empty{color:var(--muted);padding:14px 2px}
+.subtle{color:var(--muted);font-size:13px;margin:8px 0}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:420px}
+th{text-align:left;font-size:12.5px;color:var(--muted);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:12px 10px;border-bottom:1px solid var(--line)}tr:last-child td{border-bottom:0}
+.pill{display:inline-block;min-width:30px;text-align:center;padding:2px 10px;border-radius:99px;background:var(--soft);color:var(--brand);font-weight:700;font-size:13px}
+.pill.low{background:var(--warn-bg);color:var(--warn)}
+.search{max-width:260px}.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.scanbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}.scanrow{display:flex;gap:8px;align-items:stretch}.scanrow input{flex:1;min-width:0}.scanbox{display:flex;gap:10px;align-items:end;margin-bottom:6px}.scanbox label{flex:1}#reader{width:100%;min-height:240px;background:#000;border-radius:12px;overflow:hidden}
+.notice{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:13.5px;margin:0 0 16px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:grid;grid-template-columns:repeat(7,1fr);background:var(--surface);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{background:none;border:0;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;padding:6px 0;border-radius:10px}
+nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button.active{color:var(--brand)}
+@media(min-width:900px){
+nav{top:0;right:auto;width:208px;grid-template-columns:1fr;align-content:start;gap:4px;padding:88px 12px 0;border-top:0;border-right:1px solid var(--line)}
+nav button{flex-direction:row;gap:12px;font-size:14px;padding:11px 12px;justify-content:flex-start}
+nav button.active{background:var(--soft)}
+header,main{margin-left:max(208px,calc(50vw - 282px))}
+header{max-width:none;width:min(980px,calc(100vw - 208px))}main{width:min(980px,calc(100vw - 208px))}
+}
+#toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90vw}
+#toast.show{opacity:1}
+dialog{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:20px;width:min(440px,92vw)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog .body{display:grid;gap:12px}dialog .body:not(:empty){margin-top:4px}
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+[hidden]{display:none!important}
+.cart-row{display:grid;gap:8px;padding:11px 0;border-bottom:1px solid var(--line)}.cart-row:last-child{border-bottom:0}
+.cart-top,.cart-bot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.qty{display:flex;align-items:center;gap:6px}.qty button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:20px;line-height:1;padding:0}.qty input{width:60px;text-align:center;padding:4px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice button{min-height:64px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px;display:grid;gap:2px;text-align:center}.choice button small{color:var(--muted);font-weight:500}.choice button.on{border-color:var(--brand);background:var(--soft)}
+.debt{color:var(--danger);font-weight:800}.ok{color:var(--brand);font-weight:700}
+.cust{flex-wrap:wrap}.acts{display:flex;flex-wrap:wrap;gap:8px;width:100%}.acts button{min-height:40px;padding:0 14px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">B</div><div><h1>Mi Bodeguita</h1><small>Gestión de minimarket</small></div></div><div class="status"><span id="netDot"></span><span id="netText">Guardado en este dispositivo</span></div></header>
+<nav id="nav">
+<button class="active" data-page="dashboard"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Resumen</button>
+<button data-page="sales"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h3l2.7 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 7H6"/></svg>Ventas</button>
+<button data-page="products"><svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>Productos</button>
+<button data-page="fiados"><svg viewBox="0 0 24 24"><path d="M4 4h12a2 2 0 0 1 2 2v14H6a2 2 0 0 1-2-2z"/><path d="M8 9h6M8 13h4"/></svg>Fiados</button>
+<button data-page="expenses"><svg viewBox="0 0 24 24"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l12-4v4M17 14h2"/></svg>Gastos</button>
+<button data-page="reports"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Reportes</button>
+<button data-page="settings"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>Ajustes</button>
+</nav>
+<main>
+<section id="dashboard" class="page active">
+<div class="hero"><span>Ventas de hoy</span><strong id="todaySales">$0.00</strong><span id="todayCount">0 operaciones</span><button class="primary" data-goto="sales">Nueva venta</button></div>
+<div class="stats"><article><span>Gastos de hoy</span><strong id="todayExpenses">$0.00</strong></article><article><span>Ganancia bruta</span><strong id="todayProfit">$0.00</strong><small>Ventas menos costo</small></article><article><span>Productos</span><strong id="productCount">0</strong><small id="lowStock">Sin alertas de stock</small></article><article><span>Por cobrar (fiado)</span><strong id="dashFiado">$0.00</strong></article></div>
+<div class="panel"><div class="panel-head"><h3>Actividad reciente</h3><button class="link" data-goto="reports">Ver reportes</button></div><div id="recent" class="empty">Aún no hay movimientos. Registra tu primera venta o producto.</div></div>
+<div class="notice">Tus datos se guardan en este dispositivo. Conecta Firebase en Ajustes para tener una copia en la nube.</div>
+</section>
+<section id="sales" class="page"><h2>Nueva venta</h2>
+<div class="two-col"><div class="panel"><h3>Productos</h3><div class="scanbox"><label>Código de barras<input id="saleCode" inputmode="numeric" autocomplete="off" placeholder="Escribe o usa un lector y Enter"></label><button type="button" class="primary scanbtn" data-scan="sale"><svg class="ico" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M11 8v8M15 8v8M18 8v8"/></svg>Escanear</button></div><p class="subtle">O elige el producto de la lista:</p><label>Producto<select id="saleProduct"><option value="">Selecciona un producto</option></select></label><div class="inline"><label>Cantidad<input id="saleQty" type="number" min="1" step="1" value="1"></label><button id="addCart" class="primary">Agregar</button></div><div id="cartList" class="list empty">El carrito está vacío.</div></div>
+<div class="panel"><h3>Total</h3><div id="cartTotal" class="big-total">$0.00</div><div class="form-grid"><label>Método de pago<select id="payment"><option>Efectivo</option><option>Transferencia</option><option>Tarjeta</option><option>Otro</option></select></label><label>Efectivo recibido ($)<input id="cashReceived" type="number" min="0" step=".01" placeholder="0.00"></label></div><div id="change" class="subtle"></div><button id="completeSale" class="primary full">Confirmar venta</button><p class="subtle">Al confirmar se registra la venta y se descuenta el stock.</p></div></div></section>
+<section id="products" class="page"><h2>Productos e inventario</h2>
+<div class="panel"><h3>Agregar producto</h3><form id="productForm" class="form-grid"><label>Nombre<input name="name" required maxlength="100" placeholder="Ej. Arroz 1 kg"></label><label>Código de barras o SKU<div class="scanrow"><input name="sku" maxlength="60" placeholder="Opcional" inputmode="numeric"><button type="button" class="secondary scanbtn" data-scan="sku" aria-label="Escanear código"><svg class="ico" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M11 8v8M15 8v8M18 8v8"/></svg>Escanear</button></div></label><label>Costo unitario ($)<input name="cost" type="number" min="0" step=".01" required></label><label>Precio de venta ($)<input name="price" type="number" min="0" step=".01" required></label><label>Existencias<input name="stock" type="number" min="0" step="1" required></label><label>Avisar cuando queden<input name="minStock" type="number" min="0" step="1" value="3" required></label><button class="primary" type="submit">Guardar producto</button></form></div>
+<div class="panel"><div class="panel-head"><h3>Inventario</h3><div class="scanrow search"><input id="productSearch" placeholder="Buscar o escanear"><button type="button" class="secondary scanbtn" data-scan="search" aria-label="Escanear para buscar"><svg class="ico" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M11 8v8M15 8v8M18 8v8"/></svg></button></div></div><div id="productTable"></div></div></section>
+<section id="fiados" class="page"><h2>Fiados</h2>
+<div class="stats"><article><span>Por cobrar</span><strong id="fiTotal">$0.00</strong><small id="fiCount">0 clientes con deuda</small></article><article><span>Abonos de hoy</span><strong id="fiPaidToday">$0.00</strong></article></div>
+<div class="panel"><h3>Nuevo cliente</h3><div class="inline"><label>Nombre<input id="newCust" maxlength="80" placeholder="Ej. Doña María"></label><button id="addCust" class="primary">Agregar</button></div></div>
+<div class="panel"><div class="panel-head"><h3>Clientes</h3><div class="search"><input id="custSearch" placeholder="Buscar cliente"></div></div><div id="custList"></div></div></section>
+<section id="expenses" class="page"><h2>Gastos del negocio</h2><div class="panel"><form id="expenseForm" class="form-grid"><label>Concepto<input name="description" required maxlength="120" placeholder="Ej. Transporte, electricidad"></label><label>Monto ($)<input name="amount" type="number" min=".01" step=".01" required></label><label>Categoría<select name="category"><option>Servicios</option><option>Transporte</option><option>Alquiler</option><option>Personal</option><option>Mercancía</option><option>Otro</option></select></label><label>Fecha<input name="date" type="date" required></label><button class="primary" type="submit">Registrar gasto</button></form></div><div class="panel"><h3>Últimos gastos</h3><div id="expenseTable"></div></div></section>
+<section id="reports" class="page"><h2>Reportes</h2><div class="stats"><article><span>Ventas acumuladas</span><strong id="allSales">$0.00</strong></article><article><span>Costo de lo vendido</span><strong id="allCosts">$0.00</strong></article><article><span>Ganancia bruta</span><strong id="allProfit">$0.00</strong></article><article><span>Gastos registrados</span><strong id="allExpenses">$0.00</strong></article></div><div class="panel"><div class="panel-head"><h3>Historial de ventas</h3><button id="exportCsv" class="secondary">Exportar ventas CSV</button></div><div id="salesTable"></div></div><p class="subtle">La ganancia neta aproximada es la ganancia bruta menos los gastos. No sustituye la contabilidad ni los cálculos fiscales oficiales.</p></section>
+<section id="settings" class="page"><h2>Ajustes</h2><div class="panel"><h3>Nombre del negocio</h3><div class="inline"><label>Nombre visible<input id="storeName" value="Mi Bodeguita" maxlength="80"></label><button id="saveName" class="secondary">Guardar</button></div></div>
+<div class="panel"><h3>Sincronizar con Firebase</h3><p class="subtle">Pega la configuración web de tu proyecto (Firebase Console, Configuración del proyecto, Tus apps). Solo faltan la API key y el App ID.</p><form id="firebaseForm" class="form-grid"><label>API key<input name="apiKey" autocomplete="off" placeholder="AIza..."></label><label>App ID<input name="appId" autocomplete="off" placeholder="1:...:web:..."></label><label>Auth domain<input name="authDomain"></label><label>Database URL<input name="databaseURL"></label><label>Project ID<input name="projectId"></label><label>Correo<input name="email" type="email" autocomplete="username"></label><label>Contraseña<input name="password" type="password" autocomplete="current-password"></label><button type="submit" class="primary">Conectar</button></form><p id="firebaseMsg" class="subtle">Sin conectar: la app funciona en este dispositivo.</p><div class="inline"><button id="syncNow" class="secondary">Sincronizar ahora</button><button id="fbOut" class="secondary">Cerrar sesión</button></div></div>
+<div class="panel"><h3>Datos y respaldo</h3><p class="subtle">Descarga una copia JSON de tus datos y guárdala en un lugar seguro. Si borras los datos del navegador sin respaldo ni nube, se pierden.</p><div class="inline"><button id="backup" class="secondary">Descargar respaldo</button><button id="clearLocal" class="danger">Borrar datos</button></div></div></section>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+<dialog id="dlg"><form method="dialog"><h3></h3><div class="body"></div><div class="actions"><button value="cancel" class="secondary" formnovalidate>Cancelar</button><button value="ok" class="primary">Aceptar</button></div></form></dialog>
+<dialog id="scanDlg"><h3>Escanear código de barras</h3><div id="reader"></div><p class="scan-status subtle"></p><div class="actions"><button type="button" id="scanClose" class="primary">Listo</button></div></dialog>
+<script type="module">
+import{initializeApp,getApps,deleteApp}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,signOut,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import{getDatabase,ref,get,set,onValue}from"https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+const KEY="bodeguita-data-v1", CFG="bodeguita-firebase-v1", money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(Number(n)||0), today=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)}, uid=()=>Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8);
+let state=load(),cart=[],firebase=null,auth=null,db=null,remoteListener=null,remoteMode=false,remoteApplying=false;
+function blank(){return {storeName:"Mi Bodeguita",products:[],sales:[],expenses:[],customers:[],credits:[],updatedAt:Date.now()}}
+function load(){try{return {...blank(),...JSON.parse(localStorage.getItem(KEY)||"{}")}}catch{return blank()}}
+function persist(){state.updatedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}render()}
+function toast(s){const t=document.querySelector("#toast");t.textContent=s;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2600)}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function go(p){document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id===p));document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===p));if(p==="sales")renderCart();window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>go(b.dataset.page));document.querySelectorAll("[data-goto]").forEach(b=>b.onclick=()=>go(b.dataset.goto));
+window.addEventListener("online",()=>net());window.addEventListener("offline",()=>net());
+function net(){const on=navigator.onLine;document.querySelector("#netDot").style.background=on?"#25805d":"#d58b22";document.querySelector("#netText").textContent=remoteMode?(on?"Conectado a Firebase":"Sin internet · guardado local"):(on?"Guardado en este dispositivo":"Sin internet · guardado local")}
+function render(){document.querySelector("#storeName").value=state.storeName||"Mi Bodeguita";document.querySelector(".brand h1").textContent=state.storeName||"Mi Bodeguita";const todays=state.sales.filter(s=>s.date===today()),ex=state.expenses.filter(e=>e.date===today()),sum=a=>a.reduce((n,x)=>n+(+x.total||+x.amount||0),0),cost=s=>s.items.reduce((n,i)=>n+(+i.cost||0)*(+i.qty||0),0),profit=todays.reduce((n,s)=>n+s.total-cost(s),0);document.querySelector("#todaySales").textContent=money(sum(todays));document.querySelector("#todayCount").textContent=`${todays.length} operaciones`;document.querySelector("#todayExpenses").textContent=money(sum(ex));document.querySelector("#todayProfit").textContent=money(profit);document.querySelector("#productCount").textContent=state.products.length;const low=state.products.filter(p=>+p.stock<=+p.minStock);document.querySelector("#lowStock").textContent=low.length?`${low.length} con stock bajo`:"Sin alertas de stock";document.querySelector("#allSales").textContent=money(sum(state.sales));document.querySelector("#allCosts").textContent=money(state.sales.reduce((n,s)=>n+cost(s),0));document.querySelector("#allProfit").textContent=money(state.sales.reduce((n,s)=>n+(+s.total||0)-cost(s),0));document.querySelector("#allExpenses").textContent=money(sum(state.expenses));renderProducts();renderFiados();renderExpenses();renderSales();renderRecent();renderCart();net()}
+function renderProducts(){const q=(document.querySelector("#productSearch")?.value||"").toLowerCase(),ps=state.products.filter(p=>(p.name+" "+p.sku).toLowerCase().includes(q));document.querySelector("#productTable").innerHTML=ps.length?`<div class="table-wrap"><table><thead><tr><th>Producto</th><th>SKU</th><th>Costo</th><th>Precio</th><th>Stock</th><th>Acción</th></tr></thead><tbody>${ps.map(p=>`<tr><td><strong>${esc(p.name)}</strong></td><td>${esc(p.sku||"—")}</td><td>${money(p.cost)}</td><td>${money(p.price)}</td><td><span class="pill ${+p.stock<=+p.minStock?"low":""}">${p.stock}</span></td><td><button class="link" data-edit="${p.id}">Editar</button> <button class="link" data-delete="${p.id}">Eliminar</button></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">No hay productos. Agrega el primero arriba.</div>';document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=async()=>{if(await ask("¿Eliminar este producto del catálogo? El historial de ventas se conserva.")){state.products=state.products.filter(p=>p.id!==b.dataset.delete);persist();queueSync()}});document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editProduct(b.dataset.edit));const sel=document.querySelector("#saleProduct");const old=sel.value;sel.innerHTML='<option value="">Selecciona un producto</option>'+state.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)} (stock ${p.stock})</option>`).join("");if(state.products.some(p=>p.id===old))sel.value=old}
+async function editProduct(id){const p=state.products.find(x=>x.id===id);if(!p)return;const ok=await ask("Editar producto",`<label>Nombre<input id="eN" required maxlength="100" value="${esc(p.name)}"></label><label>Precio de venta ($)<input id="eP" type="number" min="0" step=".01" required value="${p.price}"></label><label>Existencias<input id="eS" type="number" min="0" step="1" required value="${p.stock}"></label>`);if(!ok)return;const v=s=>document.querySelector(s).value,name=v("#eN").trim(),price=+v("#eP"),stock=+v("#eS");if(!name||!Number.isFinite(price)||price<0||!Number.isFinite(stock)||stock<0)return toast("Revisa los datos del producto.");p.name=name;p.price=price;p.stock=Math.floor(stock);persist();queueSync();toast("Producto actualizado")}
+document.querySelector("#productSearch").oninput=renderProducts;
+document.querySelector("#productForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),p={id:uid(),name:String(f.get("name")).trim(),sku:String(f.get("sku")).trim(),cost:+f.get("cost"),price:+f.get("price"),stock:Math.floor(+f.get("stock")),minStock:Math.floor(+f.get("minStock"))};if(!p.name||![p.cost,p.price,p.stock,p.minStock].every(Number.isFinite)||p.cost<0||p.price<0||p.stock<0||p.minStock<0)return toast("Revisa los datos del producto.");state.products.push(p);e.target.reset();e.target.elements.minStock.value=3;persist();queueSync();toast("Producto guardado")};
+document.querySelector("#addCart").onclick=()=>{const id=document.querySelector("#saleProduct").value,qty=+document.querySelector("#saleQty").value,p=state.products.find(x=>x.id===id);if(!p)return toast("Selecciona un producto.");if(!Number.isInteger(qty)||qty<1)return toast("Cantidad inválida.");const inCart=cart.filter(x=>x.id===id).reduce((n,x)=>n+x.qty,0);if(qty+inCart>p.stock)return toast("No hay suficiente stock.");const existing=cart.find(x=>x.id===id);if(existing)existing.qty+=qty;else cart.push({id,name:p.name,price:+p.price,cost:+p.cost,qty});renderCart()};
+function setQty(id,q){const i=cart.find(x=>x.id===id),p=state.products.find(x=>x.id===id);if(!i)return;q=Math.floor(+q);if(!Number.isFinite(q)||q<1)q=1;if(p&&q>p.stock){q=p.stock;toast("Máximo disponible: "+p.stock)}i.qty=q;renderCart()}
+function renderCart(){const el=document.querySelector("#cartList");if(!el)return;el.classList.toggle("empty",!cart.length);el.innerHTML=cart.length?cart.map(i=>`<div class="cart-row"><div class="cart-top"><strong>${esc(i.name)}</strong><button class="link" data-remove="${i.id}" aria-label="Quitar">×</button></div><div class="cart-bot"><div class="qty"><button type="button" data-dec="${i.id}" aria-label="Menos">−</button><input type="number" min="1" step="1" inputmode="numeric" value="${i.qty}" data-qty="${i.id}" aria-label="Cantidad"><button type="button" data-inc="${i.id}" aria-label="Más">+</button></div><span class="subtle" style="margin:0">${money(i.price)} c/u</span><strong>${money(i.price*i.qty)}</strong></div></div>`).join(""):"El carrito está vacío.";document.querySelector("#cartTotal").textContent=money(cart.reduce((n,i)=>n+i.price*i.qty,0));document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart=cart.filter(i=>i.id!==b.dataset.remove);renderCart()});document.querySelectorAll("[data-inc]").forEach(b=>b.onclick=()=>setQty(b.dataset.inc,(cart.find(x=>x.id===b.dataset.inc)?.qty||0)+1));document.querySelectorAll("[data-dec]").forEach(b=>b.onclick=()=>setQty(b.dataset.dec,(cart.find(x=>x.id===b.dataset.dec)?.qty||2)-1));document.querySelectorAll("[data-qty]").forEach(i=>i.onchange=()=>setQty(i.dataset.qty,i.value));const rec=+document.querySelector("#cashReceived").value||0,tot=cart.reduce((n,i)=>n+i.price*i.qty,0);document.querySelector("#change").textContent=document.querySelector("#payment").value==="Efectivo"&&rec>=tot?`Cambio: ${money(rec-tot)}`:""}
+document.querySelector("#cashReceived").oninput=renderCart;document.querySelector("#payment").onchange=renderCart;
+async function askSaleType(total){let pick="";const opts=state.customers.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+const pr=ask("¿Compra o fiado? · "+money(total),`<div class="choice"><button type="button" data-k="compra"><strong>Compra</strong><small>Paga ahora</small></button><button type="button" data-k="fiado"><strong>Fiado</strong><small>Queda en cuenta</small></button></div><div id="fiSec" hidden><label>Cliente<select id="fiCust">${opts}<option value="__new">+ Cliente nuevo</option></select></label><label id="fiNewL" hidden>Nombre del cliente nuevo<input id="fiNew" maxlength="80"></label></div>`);
+const d=document.querySelector("#dlg"),sel=d.querySelector("#fiCust"),nl=d.querySelector("#fiNewL"),sync=()=>{nl.hidden=sel.value!=="__new"};
+d.querySelectorAll(".choice button").forEach(b=>b.onclick=()=>{pick=b.dataset.k;d.querySelectorAll(".choice button").forEach(x=>x.classList.toggle("on",x===b));d.querySelector("#fiSec").hidden=pick!=="fiado"});sel.onchange=sync;sync();
+if(!await pr)return null;if(!pick){toast("Elige si es compra o fiado.");return null}if(pick==="compra")return{fiado:false};
+if(sel.value!=="__new")return{fiado:true,customerId:sel.value};
+const name=d.querySelector("#fiNew").value.trim();if(!name){toast("Escribe el nombre del cliente.");return null}
+const ex=state.customers.find(c=>c.name.toLowerCase()===name.toLowerCase());return ex?{fiado:true,customerId:ex.id}:{fiado:true,newName:name}}
+document.querySelector("#completeSale").onclick=async()=>{if(!cart.length)return toast("Agrega al menos un producto.");for(const i of cart){const p=state.products.find(p=>p.id===i.id);if(!p||p.stock<i.qty)return toast(`Stock insuficiente para ${i.name}. Actualiza el carrito.`)}const total=cart.reduce((n,i)=>n+i.price*i.qty,0),kind=await askSaleType(total);if(!kind)return;let payment=document.querySelector("#payment").value,received=+document.querySelector("#cashReceived").value||0,cust=null;if(kind.fiado){payment="Fiado";received=0;cust=kind.customerId?state.customers.find(c=>c.id===kind.customerId):null;if(!cust){cust={id:uid(),name:kind.newName,phone:""};state.customers.push(cust)}}else if(payment==="Efectivo"&&received&&received<total)return toast("El efectivo recibido no cubre el total.");const sale={id:uid(),date:today(),createdAt:new Date().toISOString(),items:cart.map(i=>({...i})),total,payment,received:payment==="Efectivo"?received:null};if(cust){sale.fiado=true;sale.customerId=cust.id;sale.customerName=cust.name;state.credits.push({id:uid(),customerId:cust.id,type:"fiado",amount:total,date:today(),createdAt:sale.createdAt,saleId:sale.id,note:cart.map(i=>`${i.name} x${i.qty}`).join(", ")})}for(const i of cart)state.products.find(p=>p.id===i.id).stock-=i.qty;state.sales.unshift(sale);cart=[];document.querySelector("#cashReceived").value="";persist();queueSync();toast((cust?"Fiado registrado a "+cust.name+" · ":"Venta registrada · ")+money(total));go("sales")};
+
+const r2=n=>Math.round(n*100)/100,bal=id=>r2(state.credits.reduce((n,c)=>c.customerId===id?n+(c.type==="fiado"?+c.amount:-c.amount):n,0)),val=s=>document.querySelector(s).value;
+function renderFiados(){const q=(document.querySelector("#custSearch")?.value||"").toLowerCase(),all=state.customers.map(c=>({...c,b:bal(c.id)})),owing=all.filter(c=>c.b>0.004),rows=all.filter(c=>c.name.toLowerCase().includes(q)).sort((a,b)=>b.b-a.b||a.name.localeCompare(b.name)),tot=owing.reduce((n,c)=>n+c.b,0);
+document.querySelector("#fiTotal").textContent=money(tot);document.querySelector("#dashFiado").textContent=money(tot);document.querySelector("#fiCount").textContent=`${owing.length} cliente${owing.length===1?"":"s"} con deuda`;document.querySelector("#fiPaidToday").textContent=money(state.credits.filter(c=>c.type==="abono"&&c.date===today()).reduce((n,c)=>n+ +c.amount,0));
+document.querySelector("#custList").innerHTML=rows.length?rows.map(c=>`<div class="list-row cust"><div><strong>${esc(c.name)}</strong></div><div class="${c.b>0.004?"debt":"ok"}">${c.b>0.004?"Debe "+money(c.b):"Al día"}</div><div class="acts"><button class="primary" data-abono="${c.id}">Abonar</button><button class="secondary" data-deuda="${c.id}">+ Fiado</button><button class="secondary" data-hist="${c.id}">Historial</button>${c.b<=0.004?`<button class="danger" data-delcust="${c.id}">Eliminar</button>`:""}</div></div>`).join(""):'<div class="empty">Aún no hay clientes. Agrégalos arriba o al hacer una venta fiada.</div>';
+document.querySelectorAll("[data-abono]").forEach(b=>b.onclick=()=>abonar(b.dataset.abono));document.querySelectorAll("[data-deuda]").forEach(b=>b.onclick=()=>addDeuda(b.dataset.deuda));document.querySelectorAll("[data-hist]").forEach(b=>b.onclick=()=>historial(b.dataset.hist));
+document.querySelectorAll("[data-delcust]").forEach(b=>b.onclick=async()=>{if(await ask("¿Eliminar este cliente y su historial? Está al día.")){const id=b.dataset.delcust;state.customers=state.customers.filter(c=>c.id!==id);state.credits=state.credits.filter(c=>c.customerId!==id);persist();queueSync()}})}
+async function abonar(id){const c=state.customers.find(x=>x.id===id),b=bal(id);if(!c)return;if(b<=0.004)return toast("Este cliente no tiene deuda.");
+if(!await ask("Abono de "+c.name,`<p class="subtle">Debe: <strong>${money(b)}</strong></p><label>Monto del abono ($)<input id="aM" type="number" min=".01" step=".01" inputmode="decimal" placeholder="0.00"></label><label>Método<select id="aP"><option>Efectivo</option><option>Transferencia</option><option>Otro</option></select></label><label>Nota (opcional)<input id="aN" maxlength="100"></label>`))return;
+const amt=r2(+val("#aM"));if(!(amt>0))return toast("Monto inválido.");if(amt>b+0.004)return toast("El abono supera la deuda ("+money(b)+").");
+state.credits.push({id:uid(),customerId:id,type:"abono",amount:amt,date:today(),createdAt:new Date().toISOString(),method:val("#aP"),note:val("#aN").trim()});persist();queueSync();toast("Abono registrado · "+money(amt)+(amt>=b-0.004?" · cuenta saldada":""))}
+async function addDeuda(id){const c=state.customers.find(x=>x.id===id);if(!c)return;
+if(!await ask("Agregar fiado a "+c.name,`<label>Monto ($)<input id="dM" type="number" min=".01" step=".01" inputmode="decimal" placeholder="0.00"></label><label>Detalle (opcional)<input id="dN" maxlength="100" placeholder="Ej. deuda anterior"></label>`))return;
+const amt=r2(+val("#dM"));if(!(amt>0))return toast("Monto inválido.");state.credits.push({id:uid(),customerId:id,type:"fiado",amount:amt,date:today(),createdAt:new Date().toISOString(),note:val("#dN").trim()});persist();queueSync();toast("Fiado agregado · "+money(amt))}
+function historial(id){const c=state.customers.find(x=>x.id===id);if(!c)return;const m=state.credits.filter(x=>x.customerId===id).sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
+ask("Historial · "+c.name,`<p><strong class="${bal(id)>0.004?"debt":"ok"}">${bal(id)>0.004?"Debe "+money(bal(id)):"Al día"}</strong></p>`+(m.length?m.map(x=>`<div class="list-row"><div><strong>${x.type==="abono"?"Abono":"Fiado"}</strong><div class="subtle" style="margin:0">${esc(x.date)}${x.method?" · "+esc(x.method):""}${x.note?" · "+esc(x.note):""}</div></div><strong>${x.type==="abono"?"−":"+"}${money(x.amount)}</strong></div>`).join(""):'<div class="empty">Sin movimientos.</div>'))}
+document.querySelector("#custSearch").oninput=renderFiados;
+document.querySelector("#addCust").onclick=()=>{const n=val("#newCust").trim();if(!n)return toast("Escribe el nombre.");if(state.customers.some(c=>c.name.toLowerCase()===n.toLowerCase()))return toast("Ese cliente ya existe.");state.customers.push({id:uid(),name:n,phone:""});document.querySelector("#newCust").value="";persist();queueSync();toast("Cliente agregado")};
+document.querySelector("#expenseForm").elements.date.value=today();
+document.querySelector("#expenseForm").onsubmit=e=>{e.preventDefault();const f=new FormData(e.target),expense={id:uid(),description:String(f.get("description")).trim(),amount:+f.get("amount"),category:String(f.get("category")),date:String(f.get("date"))};if(!expense.description||!Number.isFinite(expense.amount)||expense.amount<=0)return toast("Revisa el gasto.");state.expenses.unshift(expense);e.target.reset();e.target.elements.date.value=today();persist();queueSync();toast("Gasto registrado")};
+function renderExpenses(){const es=state.expenses.slice(0,30);document.querySelector("#expenseTable").innerHTML=es.length?`<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Concepto</th><th>Categoría</th><th>Monto</th></tr></thead><tbody>${es.map(e=>`<tr><td>${esc(e.date)}</td><td>${esc(e.description)}</td><td>${esc(e.category)}</td><td>${money(e.amount)}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">Todavía no hay gastos registrados.</div>'}
+function renderSales(){document.querySelector("#salesTable").innerHTML=state.sales.length?`<div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Productos</th><th>Pago</th><th>Total</th></tr></thead><tbody>${state.sales.slice(0,100).map(s=>`<tr><td>${esc(s.date)}</td><td>${s.items.reduce((n,i)=>n+i.qty,0)} unidades</td><td>${esc(s.payment)}${s.fiado?" · "+esc(s.customerName||""):""}</td><td><strong>${money(s.total)}</strong></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">Todavía no hay ventas.</div>'}
+function renderRecent(){const all=[...state.sales.map(s=>({date:s.createdAt||s.date,label:s.fiado?"Venta fiada":"Venta",detail:s.items.map(i=>i.name).join(", "),amount:s.total})),...state.credits.filter(c=>c.type==="abono").map(c=>({date:c.createdAt,label:"Abono",detail:state.customers.find(x=>x.id===c.customerId)?.name||"Cliente",amount:c.amount})),...state.expenses.map(e=>({date:e.date,label:"Gasto",detail:e.description,amount:-e.amount}))].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,6);document.querySelector("#recent").innerHTML=all.length?all.map(x=>`<div class="list-row"><div><strong>${esc(x.label)}</strong><div class="subtle">${esc(x.detail)} · ${esc(String(x.date).slice(0,16))}</div></div><strong>${x.amount<0?"−":""}${money(Math.abs(x.amount))}</strong></div>`).join(""):'Todavía no hay movimientos. Registra tu primera venta o producto.'}
+document.querySelector("#saveName").onclick=()=>{const v=document.querySelector("#storeName").value.trim();if(!v)return toast("Escribe el nombre del negocio.");state.storeName=v;persist();queueSync();toast("Nombre guardado")};
+document.querySelector("#backup").onclick=()=>download("respaldo-bodeguita-"+today()+".json",JSON.stringify(state,null,2),"application/json");
+document.querySelector("#exportCsv").onclick=()=>{const rows=[["id","fecha","total_usd","metodo_pago","productos"],...state.sales.map(s=>[s.id,s.date,s.total,s.fiado?"Fiado - "+(s.customerName||""):s.payment,s.items.map(i=>`${i.name} x${i.qty}`).join(" | ")])];download("ventas-"+today()+".csv",rows.map(r=>r.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(",")).join("\r\n"),"text/csv;charset=utf-8")};
+function download(name,content,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
+document.querySelector("#clearLocal").onclick=async()=>{if(await ask("¿Borrar TODOS los productos, ventas y gastos locales de este dispositivo? Descarga un respaldo primero. Esta acción no se puede deshacer.")){localStorage.removeItem(KEY);state=blank();persist();toast("Datos locales borrados")}};
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+
+const FB_DEF={authDomain:"mi-bodeguita-cf2ff.firebaseapp.com",databaseURL:"https://mi-bodeguita-cf2ff-default-rtdb.firebaseio.com",projectId:"mi-bodeguita-cf2ff"},fmsg=t=>document.querySelector("#firebaseMsg").textContent=t;
+let asking=false;
+function getCfg(){try{return JSON.parse(localStorage.getItem(CFG)||"{}")}catch{return {}}}
+function ask(title,html=""){return new Promise(r=>{const d=document.querySelector("#dlg");d.querySelector("h3").textContent=title;d.querySelector(".body").innerHTML=html;d.returnValue="";d.onclose=()=>r(d.returnValue==="ok");d.showModal()})}
+const isEmpty=s=>!(s.products?.length||s.sales?.length||s.expenses?.length||s.customers?.length||s.credits?.length);
+function applyRemote(r){remoteApplying=true;state={...blank(),...r};try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}remoteApplying=false;render()}
+async function offer(r){if(asking)return;asking=true;const ok=await ask("Hay datos más recientes en la nube","<p class='subtle'>¿Reemplazar los datos de este dispositivo por los de la nube?</p>");asking=false;if(ok)applyRemote(r)}
+async function fbInit(c){const old=getApps().find(a=>a.name==="bodeguita");if(old)await deleteApp(old);const app=initializeApp(c,"bodeguita");auth=getAuth(app);db=getDatabase(app);onAuthStateChanged(auth,u=>u?startRemote():stopRemote())}
+function stopRemote(){if(remoteListener)remoteListener();remoteListener=null;remoteMode=false;net()}
+async function startRemote(){if(remoteMode)return;remoteMode=true;net();const root=ref(db,`businesses/${auth.currentUser.uid}/data`);try{const snap=await get(root);if(snap.exists()){const r=snap.val();if(isEmpty(state))applyRemote(r);else if((r.updatedAt||0)>(state.updatedAt||0))await offer(r);else await set(root,state)}else await set(root,state);remoteListener=onValue(root,s=>{if(remoteApplying||!s.exists())return;const r=s.val();if((r.updatedAt||0)>(state.updatedAt||0))offer(r)});fmsg("Conectado. Tus datos se sincronizan con la nube.");toast("Firebase conectado")}catch(e){fmsg("No se pudo leer la nube: "+(e.code||e.message)+". Revisa las reglas de la base de datos.")}}
+async function queueSync(){if(!remoteMode||!auth?.currentUser||!db||!navigator.onLine)return;try{await set(ref(db,`businesses/${auth.currentUser.uid}/data`),state);fmsg("Sincronizado con Firebase.")}catch(e){fmsg("Pendiente de sincronizar: "+(e.code||e.message))}}
+window.addEventListener("online",queueSync);
+document.querySelector("#firebaseForm").onsubmit=async e=>{e.preventDefault();if(!navigator.onLine)return toast("Necesitas internet para iniciar sesión.");const f=new FormData(e.target),g=k=>String(f.get(k)).trim(),config={apiKey:g("apiKey"),authDomain:g("authDomain"),databaseURL:g("databaseURL"),projectId:g("projectId"),appId:g("appId")},email=g("email"),password=String(f.get("password"));if(!config.apiKey||!config.databaseURL||!config.projectId||!config.appId||!email||!password)return toast("Completa todos los campos.");fmsg("Conectando…");try{await fbInit(config);await signInWithEmailAndPassword(auth,email,password);localStorage.setItem(CFG,JSON.stringify({...config,email}));e.target.elements.password.value=""}catch(err){console.error(err);fmsg("No se pudo conectar: "+(err.code||err.message));toast("No se pudo conectar.")}};
+document.querySelector("#syncNow").onclick=async()=>{if(!remoteMode)return toast("Primero conecta Firebase e inicia sesión.");if(!navigator.onLine)return toast("No hay internet. Los cambios siguen guardados localmente.");await queueSync();toast("Sincronizado")};
+document.querySelector("#fbOut").onclick=async()=>{if(!auth)return;await signOut(auth);try{localStorage.removeItem(CFG)}catch(e){}fmsg("Sesión cerrada. La app sigue funcionando en este dispositivo.")};
+{const sv=getCfg(),c=sv.projectId===FB_DEF.projectId?{...FB_DEF,...sv}:{...FB_DEF},el=document.querySelector("#firebaseForm").elements;for(const k of ["apiKey","authDomain","databaseURL","projectId","appId","email"])if(c[k])el[k].value=c[k];if(c.apiKey&&c.appId)fbInit(c).catch(e=>fmsg("No se pudo reconectar: "+(e.code||e.message)))}
+const H5URL="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js";
+let h5=null,scanner=null;
+const loadLib=()=>window.Html5Qrcode?Promise.resolve():h5||(h5=new Promise((ok,no)=>{const s=document.createElement("script");s.src=H5URL;s.onload=ok;s.onerror=()=>{h5=null;no(new Error("lib"))};document.head.appendChild(s)}));
+const beep=()=>{try{navigator.vibrate&&navigator.vibrate(60);const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator();o.frequency.value=1000;o.connect(c.destination);o.start();setTimeout(()=>{o.stop();c.close()},110)}catch(e){}};
+async function scanCodes(onCode,{continuous=false}={}){
+const d=document.querySelector("#scanDlg"),st=d.querySelector(".scan-status");let last="",lastT=0,stopping=false;
+st.textContent="Cargando cámara…";d.showModal();
+const stop=async()=>{if(stopping)return;stopping=true;try{await scanner.stop();scanner.clear()}catch(e){}scanner=null;if(d.open)d.close()};
+d.onclose=stop;document.querySelector("#scanClose").onclick=stop;
+try{await loadLib();const F=Html5QrcodeSupportedFormats;
+scanner=new Html5Qrcode("reader",{formatsToSupport:[F.EAN_13,F.EAN_8,F.UPC_A,F.UPC_E,F.CODE_128,F.CODE_39,F.ITF],experimentalFeatures:{useBarCodeDetectorIfSupported:true},verbose:false});
+await scanner.start({facingMode:"environment"},{fps:10,qrbox:{width:280,height:150}},async text=>{const now=Date.now();if(text===last&&now-lastT<1800)return;last=text;lastT=now;beep();const msg=onCode(text);if(continuous){st.textContent=msg||("Leído: "+text)}else{await stop();if(msg)toast(msg)}},()=>{});
+st.textContent=continuous?"Escanea uno tras otro. Toca Listo al terminar.":"Apunta la cámara al código de barras."
+}catch(e){console.error(e);await stop();toast("No se pudo abrir la cámara. Permite el acceso o escribe el código.")}}
+function addByCode(code){code=String(code).trim();if(!code)return"";const p=state.products.find(x=>x.sku&&String(x.sku).trim()===code);if(!p)return"Código "+code+" no registrado";const inCart=cart.filter(x=>x.id===p.id).reduce((n,x)=>n+x.qty,0);if(inCart+1>p.stock)return"Sin stock: "+p.name;const ex=cart.find(x=>x.id===p.id);if(ex)ex.qty++;else cart.push({id:p.id,name:p.name,price:+p.price,cost:+p.cost,qty:1});renderCart();return"Agregado: "+p.name}
+document.querySelector("#saleCode").onkeydown=e=>{if(e.key!=="Enter")return;e.preventDefault();const m=addByCode(e.target.value);e.target.value="";if(m)toast(m)};
+document.querySelectorAll("[data-scan]").forEach(b=>b.onclick=()=>{const k=b.dataset.scan;
+if(k==="sale")scanCodes(addByCode,{continuous:true});
+if(k==="sku")scanCodes(code=>{document.querySelector("#productForm").elements.sku.value=code;const dup=state.products.find(p=>String(p.sku).trim()===code);return dup?"Ese código ya pertenece a: "+dup.name:"Código leído: "+code});
+if(k==="search")scanCodes(code=>{document.querySelector("#productSearch").value=code;renderProducts();return""})});
+render();
+</script>
+</body>
+</html>
